@@ -1,0 +1,7 @@
+__pycache__
+/venv/
+/static/
+
+# Only for demo purpose the sqlite3 db will be committed.
+# In production we should use either PostgreSql or MySql
+# *.sqlite3
