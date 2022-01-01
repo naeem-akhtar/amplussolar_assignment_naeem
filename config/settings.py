@@ -14,7 +14,7 @@ DEBUG = (os.environ.get('DEBUG') == "True")
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'solarplants-naeem.heroku.com',
+    'solarplants-naeem.herokuapp.com',
 ]
 
 
