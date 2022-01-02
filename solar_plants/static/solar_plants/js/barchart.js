@@ -1,4 +1,4 @@
-let solar_plants_report_endpoint = "solarplant/report"
+let solar_plant_report_endpoint = "solarplant/report"
 
 // Plot chart once the page is ready
 $(document).ready(() => {
@@ -14,8 +14,14 @@ $("#selectedSolarPlant").click(() => {
 let plotBarChartForSelectedPlant = () => {
     let selectedSolarPlant = document.getElementById('selectedSolarPlant').value;
 
+    // Do not fetch data if no 'plant_id' is provided from backend.
+    if (!selectedSolarPlant) {
+        window.alert("Solar Plants information not available.");
+        return;
+    }
+
     $.ajax({
-        url: solar_plants_report_endpoint,
+        url: solar_plant_report_endpoint,
         type: "GET",
         dataType: "json",
         data: {
@@ -46,12 +52,13 @@ let plotBarChartForSelectedPlant = () => {
 
 
 let plotBarChart = (data) => {
-    let context = document.getElementById('reportBarChart').getContext('2d');
+    let context = document.getElementById('reportBarChartCanvas').getContext('2d');
     let barChartConfig = {
         type: 'bar',
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: true,
             title: {
                 display: true,
                 position: 'bottom',
@@ -69,8 +76,8 @@ let plotBarChart = (data) => {
 let clearReportChart = () => {
     // The ".clear()" method will clears the canvas, but
     // it leaves the object alive, instead remove and create a new canvas.
-    $('#reportBarChart').remove();
-    $('#reportSolarPlant').append(
-        '<canvas id="reportBarChart"></canvas>'
+    $('#reportBarChartCanvas').remove();
+    $('#reportBarChart').append(
+        '<canvas id="reportBarChartCanvas" class="table"></canvas>'
     );
 }

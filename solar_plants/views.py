@@ -16,7 +16,8 @@ def report_page(request):
     Render barchart page with all the plants ids.
     """
     context = {
-        'plants': list(SolarPlant.objects.all().order_by('plant_id'))
+        'page_title': 'Solar Plant Report',
+        'plants': list(SolarPlant.objects.all().order_by('plant_id')),
     }
     return render(request, template_name='solar_plants/barchart.html', context=context)
 
@@ -29,7 +30,7 @@ def solar_plant_report(request):
     if request.method == 'GET':
         plant_id = request.GET.get('plant_id', None)
 
-        if plant_id is None:
+        if not plant_id:
             logger.error(ERROR_MSG__MISSING_PLANT_ID)
             return HttpResponseBadRequest(content=ERROR_MSG__MISSING_PLANT_ID)
 

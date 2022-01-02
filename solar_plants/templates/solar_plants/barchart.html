@@ -3,17 +3,17 @@
 {% block chart %}
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <label class="input-group-text" for="solarPlant">Choose a solar plant ID</label>
+            <label class="input-group-text" for="solarPlant">Select Solar Plant ID</label>
         </div>
         <select class="custom-select" name="solarPlant" id="selectedSolarPlant">
-            {% if plants %}
-                {% for plant in plants %}
-                <option value={{ plant.plant_id }}>{{ plant.plant_id }}</option>
-                {% endfor %}
-            {% endif %}
-        </select>          
+        {% for plant in plants %}
+            <option value={{ plant.plant_id }}>{{ plant.plant_id }}</option>
+        {% endfor %}
+        </select>
     </div>
-    <canvas id="reportBarChart"></canvas>
+    <div id="reportBarChart" class="table-responsive">
+        <canvas id="reportBarChartCanvas" class="table"></canvas>
+    </div>
 {% endblock chart %}
 
 {% load static %}
