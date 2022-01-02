@@ -16,7 +16,7 @@ def report_page(request):
     Render barchart page with all the plants ids.
     """
     context = {
-        'plants': list(SolarPlant.objects.all())
+        'plants': list(SolarPlant.objects.all().order_by('plant_id'))
     }
     return render(request, template_name='solar_plants/barchart.html', context=context)
 
